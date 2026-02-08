@@ -1,5 +1,5 @@
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Mulish:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* Colors based on provided image and instructions */
@@ -20,8 +20,8 @@
   --color-white: #FFFFFF;
 
   /* Typography */
-  --font-heading: 'Lora', serif;
-  --font-body: 'Mulish', sans-serif;
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
   /* For "eye brow" text */
 
   /* Spacing & Sizing */
@@ -209,7 +209,7 @@ header {
   background-color: rgba(255, 253, 249, 0.95);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: none;
 }
 
 .nav-container {
@@ -301,7 +301,7 @@ header {
   padding: 4rem 2rem;
   transition: right 0.4s ease;
   z-index: 1000;
-  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -383,7 +383,7 @@ header {
   /* Soft Arch */
   object-fit: cover;
   object-position: top;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   position: relative;
   z-index: 2;
   aspect-ratio: 4/5;
@@ -435,7 +435,7 @@ header {
   backdrop-filter: blur(5px);
   padding: 5px 20px;
   transform: rotate(-5deg);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   font-family: var(--font-script);
   font-size: 1.2rem;
   z-index: 3;
@@ -483,7 +483,7 @@ header {
   background: var(--color-white);
   padding: 2rem;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   transition: transform 0.3s ease;
 }
 
@@ -492,7 +492,8 @@ header {
 }
 
 .situation-card h3 {
-  font-size: 1.25rem;
+  font-size: 2rem;
+  line-height: 1.15;
   margin-bottom: 1rem;
 }
 
@@ -564,7 +565,7 @@ header {
   z-index: 2;
   transition: all 0.4s ease;
   margin-right: 2rem;
-  box-shadow: 0 0 0 5px var(--color-bg);
+  box-shadow: none;
   /* Mask line behind */
 }
 
@@ -572,20 +573,34 @@ header {
   border-color: var(--color-primary);
   background-color: var(--color-primary);
   color: var(--color-white);
-  box-shadow: 0 0 0 5px var(--color-secondary);
+  box-shadow: none;
 }
 
 .timeline-content {
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
+  border: none;
   padding: 2rem;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
   flex: 1;
   transition: all 0.4s ease;
+  position: relative;
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-secondary));
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  pointer-events: none;
 }
 
 .timeline-item.active .timeline-content {
-  box-shadow: var(--shadow-card);
+  background-color: var(--color-white);
 }
 
 .timeline-content h3 {
@@ -656,7 +671,7 @@ header {
   max-width: 550px;
   position: relative;
   z-index: 2;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   border: 12px solid rgba(255, 255, 255, 0.9);
 }
 
@@ -688,7 +703,7 @@ header {
   background: var(--color-white);
   padding: 2.5rem;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
   text-align: center;
   border: 1px solid #eee;
   transition: all 0.3s ease;
@@ -697,22 +712,59 @@ header {
 }
 
 .price-card:hover {
-  box-shadow: var(--shadow-card);
-  transform: translateY(-2px);
+  box-shadow: none;
+  transform: translateY(-6px);
 }
 
 .price-card.featured {
-  background: var(--color-white);
-  border: 2px solid var(--color-primary);
+  background: var(--color-heading);
+  color: var(--color-white);
   position: relative;
-  transform: scale(1.05);
-  box-shadow: var(--shadow-card);
   z-index: 1;
 }
 
-.price-card.featured:hover {
-  transform: scale(1.05) translateY(-2px);
+.price-card.featured::before {
+  display: none;
 }
+
+.popular-badge {
+  position: absolute;
+  right: 1.25rem;
+  top: 0.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  background: var(--color-primary);
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: none;
+}
+
+.price-card.featured h3 {
+  margin-top: 0.75rem;
+}
+
+.price-card.featured .price-tag,
+.price-card.featured h3 {
+  color: var(--color-white);
+}
+
+.price-card.featured .price-subtitle,
+.price-card.featured p {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.price-card.featured .btn {
+  background: var(--color-white);
+  color: var(--color-heading);
+}
+
+.price-card.featured .btn:hover {
+  background: var(--color-secondary);
+  color: var(--color-heading);
+}
+
 
 .price-tag {
   font-size: 2.5rem;
@@ -729,11 +781,59 @@ header {
 }
 
 /* Contact Form */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+
+@media (min-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+
+.contact-info h2 {
+  margin-bottom: 1rem;
+}
+
+.contact-info h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-heading);
+}
+
+.contact-item {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+}
+
+.contact-item i {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.contact-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.contact-form-wrap {
+  padding-top: 1.9rem;
+}
+
 .contact-form {
   background-color: var(--color-white);
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .form-group {
@@ -744,7 +844,7 @@ input,
 textarea,
 select {
   width: 100%;
-  padding: 1rem;
+  padding: 0.85rem 1rem;
   border: 1px solid #ddd;
   border-radius: 12px;
   font-family: var(--font-body);
@@ -760,7 +860,7 @@ textarea:focus {
 
 textarea {
   resize: vertical;
-  min-height: 150px;
+  min-height: 120px;
 }
 
 /* Footer */
@@ -834,7 +934,7 @@ footer a:hover {
   background-color: var(--color-white);
   padding: 3rem 2rem;
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
   text-align: center;
   margin-top: 4rem;
   position: relative;
