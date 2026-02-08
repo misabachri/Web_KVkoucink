@@ -1,0 +1,17 @@
+# Cesta je cíl - Koučink pro ženy 40+
+
+## O webu
+Tento web slouží jako prezentace služeb osobního koučinku od Michaely Kožíškové. Nabízí služby pro ženy, které procházejí životní změnou.
+
+## Struktura
+- Hlavní stránka (index.html): Jednostránkový web s kotvami
+  - Hero sekce: Úvodní nabídka
+  - Pro koho: Cílová skupina a problémy
+  - Jak to probíhá: Postup spolupráce
+  - O mně: Informace o koučce
+  - Ceník: Nabídka služeb
+  - Kontakt: Formulář a údaje
+
+## Technologie
+- HTML5, CSS3, Vanilla JS
+- Mobile-first responsivní design
