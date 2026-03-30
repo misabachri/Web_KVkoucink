@@ -116,4 +116,70 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial check
     updateTimeline();
   }
+
+  // Testimonials Slider
+  const sliderEl = document.querySelector('.testimonials-slider');
+  if (sliderEl) {
+    const track = sliderEl.querySelector('.testimonials-track');
+    const cards = Array.from(track.querySelectorAll('.testimonial-card'));
+    const prevBtn = sliderEl.querySelector('.slider-prev');
+    const nextBtn = sliderEl.querySelector('.slider-next');
+    const dotsContainer = sliderEl.querySelector('.slider-dots');
+
+    let currentIndex = 0;
+
+    function getVisible() {
+      return window.innerWidth >= 768 ? 2 : 1;
+    }
+
+    function getMaxIndex() {
+      return cards.length - getVisible();
+    }
+
+    function buildDots() {
+      const max = getMaxIndex();
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i <= max; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'slider-dot' + (i === currentIndex ? ' active' : '');
+        dot.setAttribute('aria-label', 'Reference ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateSlider() {
+      const visible = getVisible();
+      const gap = 32; // 2rem
+      const containerWidth = sliderEl.offsetWidth;
+      const cardWidth = visible === 2 ? (containerWidth - gap) / 2 : containerWidth;
+      const offset = currentIndex * (cardWidth + gap);
+
+      track.style.transform = 'translateX(-' + offset + 'px)';
+
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= getMaxIndex();
+
+      dotsContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    function goTo(index) {
+      currentIndex = Math.max(0, Math.min(index, getMaxIndex()));
+      updateSlider();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+    window.addEventListener('resize', () => {
+      currentIndex = Math.min(currentIndex, getMaxIndex());
+      buildDots();
+      updateSlider();
+    });
+
+    buildDots();
+    updateSlider();
+  }
 });
