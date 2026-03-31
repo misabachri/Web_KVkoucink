@@ -182,4 +182,22 @@ document.addEventListener('DOMContentLoaded', () => {
     buildDots();
     updateSlider();
   }
+
+  // Contact form – submit via fetch, stay on page
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(contactForm);
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        contactForm.reset();
+        contactForm.querySelector('.form-success').style.display = 'block';
+      }
+    });
+  }
 });

@@ -32,8 +32,8 @@
       "@type": "LocalBusiness",
       "name": "Cesta je cíl - Michaela Kožíšková",
       "image": "https://www.cestajecil.cz/Obrazky/foto-hero.jpg",
-      "telephone": "+420 000 000 000",
-      "email": "ahoj@cestajecil.cz",
+      "telephone": "+420 603 240 914",
+      "email": "michaela@koucinkkv.cz",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Karlovy Vary",
@@ -341,7 +341,7 @@
                             přežívat. Změna je život.</p>
                         <p><em>"Jedny dveře se zavřou a další se zase otevřou… Strach má velké oči."</em></p>
 
-                        <a href="mailto:ahoj@cestajecil.cz" class="btn btn-primary mt-2">Napište mi</a>
+                        <a href="mailto:michaela@koucinkkv.cz" class="btn btn-primary mt-2">Napište mi</a>
                     </div>
                 </div>
             </div>
@@ -358,13 +358,10 @@
 
                         <h3>Kde mě najdete</h3>
                         <p class="contact-item"><i class="bi bi-telephone-fill"></i>
-                            <a href="tel:+420000000000">+420 000 000 000</a>
+                            <a href="tel:+420603240914">+420 603 240 914</a>
                         </p>
                         <p class="contact-item"><i class="bi bi-envelope-fill"></i>
-                            <a href="mailto:ahoj@cestajecil.cz">ahoj@cestajecil.cz</a>
-                        </p>
-                        <p class="contact-item"><i class="bi bi-facebook"></i>
-                            <a href="#" aria-label="Facebook" target="_blank">Facebook</a>
+                            <a href="mailto:michaela@koucinkkv.cz">michaela@koucinkkv.cz</a>
                         </p>
                         <p class="contact-item"><i class="bi bi-geo-alt-fill"></i>
                             Karlovy Vary / Online</p>
@@ -372,32 +369,53 @@
                     </div>
 
                     <div class="contact-form-wrap">
-                        <form action="#" method="POST" class="contact-form">
-                            <!-- Honeypot for spam protection -->
-                            <input type="text" name="website_url" class="honey" tabindex="-1" autocomplete="off">
+                        <form action="https://formspree.io/f/xaqljlrq" method="POST" class="contact-form">
 
-                            <div class="form-group">
-                                <label for="name"
-                                    style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Jméno</label>
-                                <input type="text" id="name" name="name" required placeholder="Vaše jméno">
-                            </div>
+                          <!-- Honeypot for spam protection -->
+                          <input type="text" name="website_url" class="honey" tabindex="-1" autocomplete="off">
 
-                            <div class="form-group">
-                                <label for="email"
-                                    style="display: block; margin-bottom: 0.5rem; font-weight: 500;">E-mail</label>
-                                <input type="email" id="email" name="email" required placeholder="vas@email.cz">
-                            </div>
+                          <div class="form-group">
+                            <label for="name">Jméno</label>
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              placeholder="Vaše jméno"
+                              required
+                            />
+                          </div>
 
-                            <div class="form-group">
-                                <label for="message"
-                                    style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Zpráva</label>
-                                <textarea id="message" name="message" required
-                                    placeholder="Napište mi, co vás trápí..."></textarea>
-                            </div>
+                          <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              placeholder="vas@email.cz"
+                              required
+                            />
+                          </div>
 
-                            <div style="text-align: right;">
-                                <button type="submit" class="btn btn-primary">Odeslat zprávu</button>
-                            </div>
+                          <div class="form-group">
+                            <label for="message">Zpráva</label>
+                            <textarea
+                              id="message"
+                              name="message"
+                              placeholder="Napište mi, co vás trápí..."
+                              required
+                            ></textarea>
+                          </div>
+
+                          <div style="text-align: right;">
+                            <button type="submit" class="btn btn-primary">
+                              Odeslat zprávu
+                            </button>
+                          </div>
+
+                          <div class="form-success" style="display:none; margin-top: 1rem; font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-heading);">
+                            Děkuji za zprávu! Ozvu se vám co nejdříve.
+                          </div>
+
                         </form>
                     </div>
                 </div>
