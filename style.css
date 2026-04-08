@@ -1005,6 +1005,12 @@ footer a:hover {
   }
 }
 
+@media (max-width: 767px) {
+  .situation-card h3 {
+    font-size: 1.25rem;
+  }
+}
+
 .slider-controls {
   display: flex;
   align-items: center;
