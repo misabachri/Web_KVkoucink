@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.cestajecil.cz/sitemap.xml
+Sitemap: https://www.koucinkkv.cz/sitemap.xml
