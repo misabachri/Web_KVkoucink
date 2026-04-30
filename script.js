@@ -121,66 +121,106 @@ document.addEventListener('DOMContentLoaded', () => {
   const sliderEl = document.querySelector('.testimonials-slider');
   if (sliderEl) {
     const track = sliderEl.querySelector('.testimonials-track');
-    const cards = Array.from(track.querySelectorAll('.testimonial-card'));
+    const originalCards = Array.from(track.querySelectorAll('.testimonial-card'));
     const prevBtn = sliderEl.querySelector('.slider-prev');
     const nextBtn = sliderEl.querySelector('.slider-next');
     const dotsContainer = sliderEl.querySelector('.slider-dots');
 
     let currentIndex = 0;
+    let visibleCount = getVisible();
 
     function getVisible() {
       return window.innerWidth >= 768 ? 2 : 1;
     }
 
-    function getMaxIndex() {
-      return cards.length - getVisible();
+    function getLogicalIndex() {
+      const originalCount = originalCards.length;
+      return ((currentIndex - visibleCount) % originalCount + originalCount) % originalCount;
+    }
+
+    function rebuildTrack() {
+      visibleCount = getVisible();
+      const logicalIndex = getLogicalIndex();
+      const prependClones = originalCards
+        .slice(-visibleCount)
+        .map((card) => card.cloneNode(true));
+      const appendClones = originalCards
+        .slice(0, visibleCount)
+        .map((card) => card.cloneNode(true));
+
+      track.innerHTML = '';
+      [...prependClones, ...originalCards, ...appendClones].forEach((card) => {
+        track.appendChild(card);
+      });
+
+      currentIndex = logicalIndex + visibleCount;
     }
 
     function buildDots() {
-      const max = getMaxIndex();
       dotsContainer.innerHTML = '';
-      for (let i = 0; i <= max; i++) {
+      for (let i = 0; i < originalCards.length; i++) {
         const dot = document.createElement('button');
-        dot.className = 'slider-dot' + (i === currentIndex ? ' active' : '');
+        dot.className = 'slider-dot' + (i === getLogicalIndex() ? ' active' : '');
         dot.setAttribute('aria-label', 'Reference ' + (i + 1));
         dot.addEventListener('click', () => goTo(i));
         dotsContainer.appendChild(dot);
       }
     }
 
-    function updateSlider() {
-      const visible = getVisible();
-      const gap = 32; // 2rem
+    function updateSlider(options = {}) {
+      const { instant = false } = options;
+      const gap = parseFloat(window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap || '0');
       const containerWidth = sliderEl.offsetWidth;
-      const cardWidth = visible === 2 ? (containerWidth - gap) / 2 : containerWidth;
+      const cardWidth = visibleCount === 2 ? (containerWidth - gap) / 2 : containerWidth;
       const offset = currentIndex * (cardWidth + gap);
 
+      track.style.transition = instant ? 'none' : '';
       track.style.transform = 'translateX(-' + offset + 'px)';
 
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.disabled = currentIndex >= getMaxIndex();
-
       dotsContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
+        dot.classList.toggle('active', i === getLogicalIndex());
       });
     }
 
     function goTo(index) {
-      currentIndex = Math.max(0, Math.min(index, getMaxIndex()));
+      currentIndex = index + visibleCount;
       updateSlider();
     }
 
-    prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-    nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-
-    window.addEventListener('resize', () => {
-      currentIndex = Math.min(currentIndex, getMaxIndex());
-      buildDots();
+    prevBtn.addEventListener('click', () => {
+      currentIndex -= 1;
+      updateSlider();
+    });
+    nextBtn.addEventListener('click', () => {
+      currentIndex += 1;
       updateSlider();
     });
 
+    track.addEventListener('transitionend', () => {
+      const originalCount = originalCards.length;
+
+      if (currentIndex >= originalCount + visibleCount) {
+        currentIndex -= originalCount;
+        updateSlider({ instant: true });
+      } else if (currentIndex < visibleCount) {
+        currentIndex += originalCount;
+        updateSlider({ instant: true });
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      const nextVisible = getVisible();
+      if (nextVisible !== visibleCount) {
+        rebuildTrack();
+      }
+
+      buildDots();
+      updateSlider({ instant: true });
+    });
+
+    rebuildTrack();
     buildDots();
-    updateSlider();
+    updateSlider({ instant: true });
   }
 
   // Contact form – submit via fetch, stay on page
