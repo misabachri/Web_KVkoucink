@@ -479,6 +479,14 @@ header {
   }
 }
 
+@media (min-width: 768px) and (max-width: 991px) {
+  .card-grid > .situation-card:nth-child(3) {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: calc(50% - 1rem);
+  }
+}
+
 .situation-card {
   background: var(--color-white);
   padding: 2rem;
@@ -993,12 +1001,15 @@ footer a:hover {
 .testimonials-img-wrapper {
   position: relative;
   flex: 1;
-  max-width: 400px;
+  max-width: 480px;
+  width: 100%;
+  order: 2;
 }
 
 @media (min-width: 992px) {
   .testimonials-img-wrapper {
     max-width: none;
+    order: 0;
   }
 }
 
@@ -1029,6 +1040,7 @@ footer a:hover {
 .testimonials-slider {
   flex: 1;
   min-width: 0;
+  width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1056,6 +1068,24 @@ footer a:hover {
 @media (max-width: 767px) {
   .situation-card h3 {
     font-size: 1.25rem;
+  }
+
+  .testimonial-card {
+    padding: 1.75rem;
+  }
+
+  .testimonials-img {
+    max-height: 380px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+  .testimonials-img-wrapper {
+    max-width: 560px;
+  }
+
+  .testimonials-img {
+    max-height: 480px;
   }
 }
 
