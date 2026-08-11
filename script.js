@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let visibleCount = getVisible();
 
     function getVisible() {
-      return window.innerWidth >= 768 ? 2 : 1;
+      return 1;
     }
 
     function getLogicalIndex() {
