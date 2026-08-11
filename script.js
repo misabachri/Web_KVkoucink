@@ -126,8 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = sliderEl.querySelector('.slider-next');
     const dotsContainer = sliderEl.querySelector('.slider-dots');
 
-    let currentIndex = 0;
     let visibleCount = getVisible();
+    let currentIndex = visibleCount;
 
     function getVisible() {
       return 1;
